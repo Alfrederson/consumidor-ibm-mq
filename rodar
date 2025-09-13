@@ -1,0 +1,21 @@
+#!/bin/bash
+
+CONTAINER_NAME="getting-started-jvm"
+
+echo "packageando..."
+./mvnw package
+
+echo "buildando a imagem..."
+docker build -f src/main/docker/Dockerfile.jvm -t quarkus/getting-started-jvm .
+
+if [ $(docker ps -a -q -f name=$CONTAINER_NAME) ]; then
+    echo "matando a versão antiga"
+    docker rm -f $CONTAINER_NAME
+fi
+
+echo "rodando a versão nova..."
+docker run -d \
+    --name $CONTAINER_NAME \
+    -p 8080:8080 \
+    --restart=always \
+    quarkus/getting-started-jvm

@@ -1,30 +1,32 @@
 package org.acme.services;
 
 import org.eclipse.microprofile.reactive.messaging.Message;
+import org.jboss.logging.Logger;
 
 import io.smallrye.common.annotation.Identifier;
 import io.smallrye.reactive.messaging.IncomingInterceptor;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @Identifier("my-queue")
 @ApplicationScoped
 public class Interceptador implements IncomingInterceptor {
-
+    @Inject
+    Logger log;
+    
     @Override
     public Message<?> afterMessageReceive(Message <?> message){
-        System.out.print("receive ->");
+        log.info("recebi ["+message.getPayload()+"]");
         return message;
     }
 
     @Override
     public void onMessageAck(Message<?> message) {
-        // Called after message ack
-        System.out.print("interceptor ack("+message.getPayload()+")");
+        log.info("ack ["+message.getPayload()+"]");
     }
 
     @Override
     public void onMessageNack(Message<?> message, Throwable failure) {
-        // Called after message nack
-        System.out.print("interceptor_nack("+message.getPayload()+")");
+        log.info("nack ["+message.getPayload()+"]");
     }
 }
