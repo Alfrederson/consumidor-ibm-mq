@@ -17,6 +17,14 @@ E
 
 Ele praticamente simplesmente funciona.
 
+## turns out, it's not that simple
+
+Cada reconexão vai ser contabilizada como falha dentro de um objeto específico do smallrye, e o contador só aumenta, nunca diminui. 
+
+Se atingir o limite de reconexões (que vai ser o retry.max-retries), ele para de consumir de vez as mensagens e não tenta continuar nunca mais.
+
+Nesse caso, o apropriado a fazer é intencionalmente interromper a aplicação, seja com status code 503, seja terminando ela.
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
