@@ -4,6 +4,7 @@ import org.eclipse.microprofile.reactive.messaging.Message;
 import org.jboss.logging.Logger;
 
 import io.smallrye.common.annotation.Identifier;
+
 import io.smallrye.reactive.messaging.IncomingInterceptor;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

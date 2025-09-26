@@ -2,7 +2,6 @@ package org.acme.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.jms.JMSRuntimeException;
 
 import java.util.concurrent.CompletionStage;
 
@@ -21,9 +20,13 @@ public class Biodigestor {
     @Inject
     Logger log;
     
-    @Incoming("my-queue")
-    @Blocking
-    @Acknowledgment(Acknowledgment.Strategy.MANUAL)
+
+
+
+    // @Incoming("my-queue")
+    // @Blocking
+    // @Acknowledgment(Acknowledgment.Strategy.MANUAL)
+    
     public CompletionStage<Void> glubglub(Message<String> message) throws Exception {
         var msg = message.getPayload();
         log.info("processei ["+msg+"]");
@@ -54,7 +57,7 @@ public class Biodigestor {
         // o método .isOk() vai retornar falso.
 
         // return message.ack().exceptionally(t -> {
-        //     log.error("que que deu?");
+        //     log.error("que que deu? "+t.getMessage());
         //     return null;
         // });
     }
