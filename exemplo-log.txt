@@ -1,0 +1,72 @@
+2025-09-26 12:08:36.245 | INFO exec -a "java" java -XX:MaxRAMPercentage=80.0 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:+ExitOnOutOfMemoryError -Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -cp "." -jar /deployments/quarkus-run.jar 
+2025-09-26 12:08:36.246 | INFO running in /deployments
+2025-09-26 12:08:37.778 | __  ____  __  _____   ___  __ ____  ______ 
+2025-09-26 12:08:37.778 |  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
+2025-09-26 12:08:37.778 |  -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \   
+2025-09-26 12:08:37.779 | --\___\_\____/_/ |_/_/|_/_/|_|\____/___/   
+2025-09-26 12:08:37.779 | 2025-09-26 15:08:37,775 INFO  [org.acm.ser.MqConfig] (main) criando connection factory
+2025-09-26 12:08:37.782 | 2025-09-26 15:08:37,782 INFO  [org.acm.ser.DigestorManual] (main) iniciando consumidor manual...
+2025-09-26 12:08:38.077 | 2025-09-26 15:08:38,077 INFO  [org.acm.ser.DigestorManual] (main) conectado, consumidor criado iniciando ingestão
+2025-09-26 12:08:38.169 | 2025-09-26 15:08:38,169 INFO  [org.acm.ser.DigestorManual] (main) <<<z
+2025-09-26 12:08:38.174 | 2025-09-26 15:08:38,174 INFO  [org.acm.ser.DigestorManual] (main) <<<k
+2025-09-26 12:08:38.179 | 2025-09-26 15:08:38,178 INFO  [org.acm.ser.DigestorManual] (main) <<<b
+2025-09-26 12:09:29.257 | 2025-09-26 15:09:29,256 INFO  [org.acm.ser.DigestorManual] (main) <<<c
+2025-09-26 12:09:38.168 | 2025-09-26T15:09:38.167710582Z EventHandler: MQRC_RECONNECTING, Reason(2009), Qmgr(null)
+2025-09-26 12:09:38.397 | 2025-09-26T15:09:38.393631570Z EventHandler: Reconnection failed
+2025-09-26 12:09:39.485 | 2025-09-26T15:09:39.485035485Z EventHandler: MQRC_RECONNECTING, Reason(2009), Qmgr(null)
+2025-09-26 12:09:39.488 | 2025-09-26T15:09:39.488224930Z EventHandler: Reconnection failed
+2025-09-26 12:09:41.525 | 2025-09-26T15:09:41.525245560Z EventHandler: MQRC_RECONNECTING, Reason(2009), Qmgr(null)
+2025-09-26 12:09:41.530 | 2025-09-26T15:09:41.529897470Z EventHandler: Reconnection failed
+2025-09-26 12:09:46.078 | 2025-09-26T15:09:46.078182078Z EventHandler: MQRC_RECONNECTING, Reason(2009), Qmgr(null)
+2025-09-26 12:09:46.083 | 2025-09-26T15:09:46.082763028Z EventHandler: Reconnection failed
+2025-09-26 12:09:55.079 | 2025-09-26T15:09:55.078454919Z EventHandler: MQRC_RECONNECTING, Reason(2009), Qmgr(null)
+2025-09-26 12:09:55.084 | 2025-09-26T15:09:55.083357458Z EventHandler: Reconnection failed
+2025-09-26 12:10:12.187 | 2025-09-26T15:10:12.186989399Z EventHandler: MQRC_RECONNECTING, Reason(2009), Qmgr(null)
+2025-09-26 12:10:12.219 | 2025-09-26T15:10:12.218854299Z EventHandler: MQRC_RECONNECTED QM1
+2025-09-26 12:10:31.628 | 2025-09-26 15:10:31,628 ERROR [org.acm.ser.DigestorManual] (main) já falhei 1 vezes, na terceira eu morro
+2025-09-26 12:10:31.631 | 2025-09-26 15:10:31,628 ERROR [org.acm.ser.DigestorManual] (main) alguma coisa na conexão deu errado: com.ibm.msg.client.jakarta.jms.DetailedTransactionRolledBackException: JMSCMQ0002: The method 'MQCMIT' failed.
+2025-09-26 12:10:31.631 | An IBM MQ call failed.
+2025-09-26 12:10:31.631 | Please see the linked exception for more information.
+2025-09-26 12:10:31.631 | 	at com.ibm.msg.client.jakarta.wmq.common.internal.Reason.reasonToException(Reason.java:705)
+2025-09-26 12:10:31.631 | 	at com.ibm.msg.client.jakarta.wmq.common.internal.Reason.createException(Reason.java:229)
+2025-09-26 12:10:31.631 | 	at com.ibm.msg.client.jakarta.wmq.common.internal.Reason.createException(Reason.java:367)
+2025-09-26 12:10:31.631 | 	at com.ibm.msg.client.jakarta.wmq.internal.WMQSession.syncpoint(WMQSession.java:1994)
+2025-09-26 12:10:31.631 | 	at com.ibm.msg.client.jakarta.wmq.internal.WMQSession.commit(WMQSession.java:872)
+2025-09-26 12:10:31.631 | 	at com.ibm.msg.client.jakarta.jms.internal.JmsSessionImpl.notifyMessagePostConsume(JmsSessionImpl.java:2788)
+2025-09-26 12:10:31.631 | 	at com.ibm.msg.client.jakarta.jms.internal.JmsSessionImpl.notifyMessageConsumed(JmsSessionImpl.java:2818)
+2025-09-26 12:10:31.631 | 	at com.ibm.msg.client.jakarta.jms.internal.JmsMessageConsumerImpl.receiveInboundMessage(JmsMessageConsumerImpl.java:1101)
+2025-09-26 12:10:31.631 | 	at com.ibm.msg.client.jakarta.jms.internal.JmsMessageConsumerImpl.receive(JmsMessageConsumerImpl.java:483)
+2025-09-26 12:10:31.631 | 	at com.ibm.mq.jakarta.jms.MQMessageConsumer.receive(MQMessageConsumer.java:212)
+2025-09-26 12:10:31.631 | 	at org.acme.services.DigestorManual.onStart(DigestorManual.java:41)
+2025-09-26 12:10:31.631 | 	at org.acme.services.DigestorManual_Observer_onStart_251peZL7l870PL4-ZhII0hH_9kY.notify(Unknown Source)
+2025-09-26 12:10:31.631 | 	at io.quarkus.arc.impl.EventImpl$Notifier.notifyObservers(EventImpl.java:351)
+2025-09-26 12:10:31.631 | 	at io.quarkus.arc.impl.EventImpl$Notifier.notify(EventImpl.java:333)
+2025-09-26 12:10:31.631 | 	at io.quarkus.arc.impl.EventImpl.fire(EventImpl.java:80)
+2025-09-26 12:10:31.631 | 	at io.quarkus.arc.runtime.ArcRecorder.fireLifecycleEvent(ArcRecorder.java:156)
+2025-09-26 12:10:31.631 | 	at io.quarkus.arc.runtime.ArcRecorder.handleLifecycleEvents(ArcRecorder.java:107)
+2025-09-26 12:10:31.631 | 	at io.quarkus.deployment.steps.LifecycleEventsBuildStep$startupEvent1144526294.deploy_0(Unknown Source)
+2025-09-26 12:10:31.631 | 	at io.quarkus.deployment.steps.LifecycleEventsBuildStep$startupEvent1144526294.deploy(Unknown Source)
+2025-09-26 12:10:31.631 | 	at io.quarkus.runner.ApplicationImpl.doStart(Unknown Source)
+2025-09-26 12:10:31.631 | 	at io.quarkus.runtime.Application.start(Application.java:101)
+2025-09-26 12:10:31.631 | 	at io.quarkus.runtime.ApplicationLifecycleManager.run(ApplicationLifecycleManager.java:119)
+2025-09-26 12:10:31.631 | 	at io.quarkus.runtime.Quarkus.run(Quarkus.java:71)
+2025-09-26 12:10:31.631 | 	at io.quarkus.runtime.Quarkus.run(Quarkus.java:44)
+2025-09-26 12:10:31.631 | 	at io.quarkus.runtime.Quarkus.run(Quarkus.java:124)
+2025-09-26 12:10:31.631 | 	at io.quarkus.runner.GeneratedMain.main(Unknown Source)
+2025-09-26 12:10:31.631 | 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+2025-09-26 12:10:31.631 | 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+2025-09-26 12:10:31.631 | 	at io.quarkus.bootstrap.runner.QuarkusEntryPoint.doRun(QuarkusEntryPoint.java:62)
+2025-09-26 12:10:31.631 | 	at io.quarkus.bootstrap.runner.QuarkusEntryPoint.main(QuarkusEntryPoint.java:33)
+2025-09-26 12:10:31.631 | Caused by: com.ibm.mq.MQException: JMSCMQ0001: IBM MQ call failed with compcode '2' ('MQCC_FAILED') reason '2003' ('MQRC_BACKED_OUT').
+2025-09-26 12:10:31.631 | 	at com.ibm.msg.client.jakarta.wmq.common.internal.Reason.createException(Reason.java:217)
+2025-09-26 12:10:31.631 | 	... 28 more
+2025-09-26 12:10:31.631 | Caused by: com.ibm.mq.jmqi.JmqiException: CC=2;RC=2003
+2025-09-26 12:10:31.631 | 	at com.ibm.mq.jmqi.remote.api.RemoteFAP.handleDoomedTransaction(RemoteFAP.java:12858)
+2025-09-26 12:10:31.631 | 	at com.ibm.mq.jmqi.remote.api.RemoteFAP.MQCMIT(RemoteFAP.java:9950)
+2025-09-26 12:10:31.631 | 	at com.ibm.mq.jmqi.monitoring.JmqiInterceptAdapter.MQCMIT(JmqiInterceptAdapter.java:246)
+2025-09-26 12:10:31.631 | 	at com.ibm.msg.client.jakarta.wmq.internal.WMQSession.syncpoint(WMQSession.java:1961)
+2025-09-26 12:10:31.631 | 	... 26 more
+2025-09-26 12:10:31.631 | 
+2025-09-26 12:10:31.654 | 2025-09-26 15:10:31,653 INFO  [org.acm.ser.DigestorManual] (main) conectado, consumidor criado iniciando ingestão
+2025-09-26 12:10:31.666 | 2025-09-26 15:10:31,665 INFO  [org.acm.ser.DigestorManual] (main) <<<miaurr
+2025-09-26 12:14:38.741 | 2025-09-26 15:14:38,740 INFO  [org.acm.ser.DigestorManual] (main) <<<eun eeeeun!
