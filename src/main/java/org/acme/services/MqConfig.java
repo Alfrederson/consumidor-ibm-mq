@@ -56,7 +56,7 @@ public class MqConfig {
                 setChannel("TOTO");
                 setQueueManager("QM1");
                 
-                setIntProperty(WMQConstants.WMQ_CLIENT_RECONNECT_OPTIONS, WMQConstants.WMQ_CLIENT_RECONNECT);
+                // setIntProperty(WMQConstants.WMQ_CLIENT_RECONNECT_OPTIONS, WMQConstants.WMQ_CLIENT_RECONNECT);
                 setBooleanProperty(WMQConstants.WMQ_VERBOSE_RECONNECT, true);
                 //setAsyncExceptions(WMQConstants.ASYNC_EXCEPTIONS_ALL);
                 setTransportType(WMQConstants.WMQ_CM_CLIENT);
