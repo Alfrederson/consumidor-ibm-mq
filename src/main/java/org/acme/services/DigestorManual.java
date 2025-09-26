@@ -42,7 +42,7 @@ public class DigestorManual {
                         var msg = consumer.receive();
                         // chega aqui só se fizer consumer.close
                         if(msg == null){
-                            throw new Exception("mensagem nula! provavelmente houve uma desconeão...");
+                            throw new Exception("mensagem nula! provavelmente houve uma desconexão...");
                         }
                         falhas=0;
 
