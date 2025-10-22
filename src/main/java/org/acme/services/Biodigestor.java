@@ -1,6 +1,7 @@
 package org.acme.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.spi.CDI;
 import jakarta.inject.Inject;
 
 import java.util.concurrent.CompletionStage;
@@ -20,22 +21,18 @@ public class Biodigestor {
     @Inject
     Logger log;
     
-
-
-
     // @Incoming("my-queue")
     // @Blocking
     // @Acknowledgment(Acknowledgment.Strategy.MANUAL)
-    
-    public CompletionStage<Void> glubglub(Message<String> message) throws Exception {
-        var msg = message.getPayload();
-        log.info("processei ["+msg+"]");
-        if("bug".equals(msg)){
-            throw new Exception("Isso mata o consumer, mas a mensagem sai da fila porque estou com AUTO_ACKNOWLEDGE.");
-        }
+    public CompletionStage<Void> glubglub(Message<String> msg) {
+        // var msg = message.getPayload();
+        log.info("processei ["+msg.getPayload()+"]");
+        // if("bug".equals(msg)){
+        //     throw new Exception("Isso mata o consumer, mas a mensagem sai da fila porque estou com AUTO_ACKNOWLEDGE.");
+        // }
         // outra estratégia: a gente deixa o smallrye-messaging falhar,
         // mas fica checando se ele matou o canal em um multi/thread
-        return message.ack();
+        return msg.ack();
 
         // quando o método .acknowledge() do delegate de dentro do Message
         // lança exceção, ela aqui dentro do exceptionally.
@@ -61,4 +58,5 @@ public class Biodigestor {
         //     return null;
         // });
     }
+
 }

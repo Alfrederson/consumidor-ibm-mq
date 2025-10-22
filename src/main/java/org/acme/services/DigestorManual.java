@@ -2,9 +2,7 @@ package org.acme.services;
 
 import org.jboss.logging.Logger;
 
-import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.StartupEvent;
-import io.vertx.mutiny.core.eventbus.Message;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
@@ -21,30 +19,41 @@ public class DigestorManual {
     @Inject
     Logger log;
 
+    // a gente pode misturar a leitura em loop com esses
+    // canais do reactive messaging
+    //@Incoming("canal")
+    public void processar(String msg){
+        log.info("processei["+msg+"]");
+    }
+
+    // private final SubmissionPublisher<String> publisher = new SubmissionPublisher<>();
+
+    // @Outgoing("canal")
+    // public Flow.Publisher<String> stream(){
+    //     return publisher;
+    // }
+
     @Inject
     private ConnectionFactory connectionFactory;
 
-
-    public void onStart(@Observes StartupEvent ev){
-        log.info("iniciando consumidor manual...");
+    public void comecarDigestao(){
         int falhas = 0;
-        while(true){
-
+        while(falhas < 3){
             try(Connection connection = connectionFactory.createConnection();
                 Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE)){
-
                 Queue queue = session.createQueue("queue:///lixo");
+
                 connection.start();
 
                 try(MessageConsumer consumer = session.createConsumer(queue)){
                     log.info("conectado, consumidor criado iniciando ingestão");
+                    falhas=0;
                     while(true){
                         var msg = consumer.receive();
                         // chega aqui só se fizer consumer.close
                         if(msg == null){
                             throw new Exception("mensagem nula! provavelmente houve uma desconexão...");
                         }
-                        falhas=0;
 
                         if (msg instanceof TextMessage txt){
                             if(txt.getText().trim().equalsIgnoreCase("bum")){
@@ -53,7 +62,7 @@ public class DigestorManual {
                                 // ser processada novamente
                                 throw new Exception("Falha simulada");
                             }
-                            log.info("<<<" + txt.getText());
+                            processar(txt.getText());
                         }else{
                             log.info("recebi mensagem que não sei o que é...");
                         }
@@ -62,11 +71,11 @@ public class DigestorManual {
             }catch(JMSException e){
                 // cai aqui se acontecer uma exceção em qualquer uma das chamadas
                 // do JMS, inclusive o receive()
-                log.error("Exception do JMS:",e);
+                log.error("Exception do JMS:" + e.getMessage());
             }catch(Exception e){
                 // só vai cair aqui se a gente não especificar WMQ_CLIENT_RECONNECT
                 // no factory
-                log.error("Exception que eu lancei:",e);
+                log.error("Exception que eu lancei:"+e.getMessage());
             }
 
             // a gente conta falhas, mas reseta o contador
@@ -78,19 +87,22 @@ public class DigestorManual {
             // falhando.
             // em um kubernetes da vida, isso causaria um crash loop, indicando
             // algum problema mais grave
-            if(++falhas==3){
-                Quarkus.asyncExit(3);
-                return;
-            }else{
-                log.error("já falhei "+falhas+" vezes, na terceira eu morro");
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
-            }        
+            ++falhas;
+            log.error("já falhei "+falhas+" vezes, na terceira eu morro");
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }                    
         }
+        //Quarkus.asyncExit(3);
+    }
 
+    public boolean funciona=false;
+    public void onStart(@Observes StartupEvent ev) throws InterruptedException{
+        if(!funciona) return;
 
+        log.info("iniciando consumidor manual...");
+        new Thread(this::comecarDigestao,"loop digestão").start();
     }
 }

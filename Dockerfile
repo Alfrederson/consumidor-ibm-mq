@@ -24,4 +24,4 @@ COPY --from=build /build/target/quarkus-app/ /app/
 EXPOSE 8080
 
 # run Quarkus app
-ENTRYPOINT ["java", "-jar", "quarkus-run.jar"]
+ENTRYPOINT ["java", "-Dquarkus.health.extensions.enabled=true", "-jar", "quarkus-run.jar"]

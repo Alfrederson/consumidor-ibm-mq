@@ -91,7 +91,11 @@ COPY --chown=185 target/quarkus-app/quarkus/ /deployments/quarkus/
 
 EXPOSE 8080
 USER 185
-ENV JAVA_OPTS_APPEND="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
+ENV QUARKUS_REST_CLIENT_CONNECT_TIMEOUT=14567
+ENV QUARKUS_REST_CLIENT_READ_TIMEOUT=14567
+ENV QUARKUS_REST_CLIENT_CONNECTION_POOL_SIZE=500
+
+ENV JAVA_OPTS_APPEND="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dquarkus.log.category.\"org.apache.http.impl.conn.PoolingHttpClientConnectionManager\".level=DEBUG -Dhttpclient.finalizer.interval=3000"
 ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
 
 ENTRYPOINT [ "/opt/jboss/container/java/run/run-java.sh" ]
